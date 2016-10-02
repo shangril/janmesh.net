@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Janmesh Camene project</title>
+ <meta charset="UTF-8"> 
+ <style>
+ .mainimg{
+	 width:40%;
+	 margin-left:30%;
+	 margin-right:30%;
+ }
+ body {
+	 font-family:sans-serif;
+	 margin-left:8%;
+	 margin-right:8%;
+	
+ }
+ div  {
+	 font-family:sans-serif;
+	 margin-top:3%;
+	 margin-left:3%;
+	 margin-right:3%;
+ }
+ .topmenu {
+	 background-color:grey;
+	padding: 4px;
+	 margin-top:2%;
+	 }
+	 	a {
+		text-decoration:none;
+	}
+
+ </style>
+</head>
+<body>
+<a class="topmenu" href="/">Français</a> <a class="topmenu" href="/english">English</a> <a class="topmenu" href="https://github.com/shangril/janmesh.net">Contribute to the Janmesh project documentation &amp; translation</a><br/><a class="topmenu" href="/english/">Accueil</a> <a class="topmenu" href="/english/local-mesh">Un&nbsp;mesh&nbsp;local&nbsp;?</a> <a class="topmenu" href="/english/pourquoi-mesh">Pour&nbsp;quoi&nbsp;faire&nbsp;?</a><!--  <a class="topmenu" href="/english/journal">Journal&nbsp;du&nbsp;JanMesh</a> --> <a class="topmenu" href="/english/rejoindre">Rejoindre&nbsp;ou&nbsp;créer&nbsp;un&nbsp;meshlocal</a> <a class="topmenu" href="/english/logiciels">Logiciels du projet Janmesh</a><!--  <a class="topmenu" href="/english/janmeshers">Janmeshiens&nbsp;&amp;&nbsp;janmeshiennes</a> --> <a class="topmenu" href="/english/irc">IRC/Contact</a>
+<h1>The Janmesh Camene project</h1>
+Janmesh is a live project of <em>cjdns/olsrd</em> mesh networking for local area interest (neighbourhood, small town scale). The <strong>Janmesh CAr MEsh NEtwork</strong> (Janmesh <strong>Camene</strong>) project studies theorically the possibility of operating such network from mobile systems built in road vehicles.  <br/> Here you will find a collection of ideas and thought related to the deployement of such network among a certain number of vehicles. 
+<h2>A mesh network inside and outside your mobile vehicle</h2>
+<ul>
+<li>Camene is a driving assistance and vehicule networking system operating an <strong>Janmesh cjdns/olsrd network</strong>, which is built from root with open-source and free software allowing to built its own DIY system at no cost excepting hardware. Ours tutorials cover Ubuntu Linux usage, which is a widespread, stable and easy-to-use free operating system that allows the most advenced technologies and usages</li>
+
+<li>
+Using olsrd to setup a physical open radio network that <strong>extends and routes automatically</strong> when new network nodes are added, Camene allows to transparently connect devices inside a single vehicle and with other vehicles inside the radio range. 
+</li>
+<li>
+With the help of the cjdns network stack, a <strong>secure and encrypted</strong> ipv6 network is built upon the open wifi mesh. 
+</li>
+<li>Devices like computing touchscreen devices such onboard user terminal displays or embeded systems serving cameras, long range network interfaces or storage servers, can <strong>network securely</strong> inside the vehicle. The vehicule can network with other mobile vehicule on the road inside the radio link range.</li>
+<li>Applications of such network</li>
+<ul>
+<li>
+Connected device can be accessed from the main Driver User Interface (typically a netbook or tablet running Ubuntu Desktop mounted at the right hand of the driver's seat)</li>
+<li> monitor cameras</li>
+<li> control media playback </li>
+<li> view real time map with other vehicle's information such as position or shared camera view</li>
+<li> start live text/audio/video chat with other drivers (or even for big vehicles, inside vehicle)</li>
+<li> configure the local wifi hotspot for non-Camene aware devices</li>
+<li> use all the possibilites of a complete computing device. 
+</li>
+</ul>
+</ul>
+<h2>Deployment example</h2>
+In the case of a single-node installation, it would be likely to be a Driver User Interface unit placed near to the driving wheel. <br/>
+Other devices can be added on the fly to the in-vehicle network and operate the Janmesh network layer and therefore be connected to any other in-board device through radio link. <br/>
+A device should have an internet connection provided either by a built-in 4G modem with its SIM card reader, or by linking through USB, dedicated wifi link or Bluetooth with any ordinary passenger's smartphone that would share its internet connectivity. </br>
+A device connected to the internet can share its connexion with any other node of the Janmesh Camene network, even with ones in remote vehicles <br/>
+Exactly the same way, any mobile Camene vehicule can get an internet connexion shared by any node of the underlying Jamnesh network in range, included fix stations<br/>
+<h3>Software</h3>
+The devices are running Ubuntu Linux (Destkop, Touch or Server edition) whic offers the availability of any needed software component accross the whole range of device families<br/>
+Each node is operating <a href="/english/jasede">Jasede</a>, the Janmesh Service Declaration utility that is used to announce publicly which computing services are available though a particular node, manage visibility of published data through the use of <strong>crews</strong> to allow contact's categorization, and help share through is module live text, audio or video, file serving and sharing, GPS position sharing and so on. Jasede provide a central user interface to access the various declared services available through the network.<br/>
+With the help of the <a href="/english/jainvime">Jainvime</a>, which is the Janmesh Instant Video Messenging software, users can join chatrooms and send video messages to other people connected in a push-to-talk fashion as of time of amateur radio communications. <br/> 
+<strong>Both of their software are currently under development. 2016/09 : specification phase</strong>
+<hr/>
+<a class="topmenu" href="/">Français</a> <a class="topmenu" href="/english">English</a> <a class="topmenu" href="https://github.com/shangril/janmesh.net">Contribute to the Janmesh project documentation &amp; translation</a><br/><a class="topmenu" href="/english/">Accueil</a> <a class="topmenu" href="/english/local-mesh">Un&nbsp;mesh&nbsp;local&nbsp;?</a> <a class="topmenu" href="/english/pourquoi-mesh">Pour&nbsp;quoi&nbsp;faire&nbsp;?</a><!--  <a class="topmenu" href="/english/journal">Journal&nbsp;du&nbsp;JanMesh</a> --> <a class="topmenu" href="/english/rejoindre">Rejoindre&nbsp;ou&nbsp;créer&nbsp;un&nbsp;meshlocal</a> <a class="topmenu" href="/english/logiciels">Logiciels du projet Janmesh</a><!--  <a class="topmenu" href="/english/janmeshers">Janmeshiens&nbsp;&amp;&nbsp;janmeshiennes</a> --> <a class="topmenu" href="/english/irc">IRC/Contact</a>
+<br/>Données cartographiques &copy; les contributeurs d'OpenStreeMap
+<div>&copy; les contributeurs de Janmesh.net - À l'exception des photographies de la section <a href="/english/janmeshers">Janmeshiens &amp; Janmeshiennes</a>, le contenu de ce site est placé sous licence libre <a href="http://creativecommons.org/licenses/by-sa/3.0/fr">Creative Commons BY-SA</a> </div>
+</body>
+</html>

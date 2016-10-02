@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Janmesh - Journal</title>
+ <meta charset="UTF-8"> 
+ <style>
+ .mainimg{
+	 width:40%;
+	 margin-left:30%;
+	 margin-right:30%;
+ }
+ body {
+	 font-family:sans-serif;
+	 margin-left:8%;
+	 margin-right:8%;
+ }
+ div  {
+	 font-family:sans-serif;
+	 margin-top:3%;
+	 margin-left:3%;
+	 margin-right:3%;
+ }
+ .topmenu {
+	 background-color:grey;
+	padding: 4px;
+	 margin-top:2%;
+	 }
+	 	a {
+		text-decoration:none;
+	}
+
+ </style>
+</head>
+<body>
+<a class="topmenu" href="/">Français</a> <a class="topmenu" href="/english">English</a> <a class="topmenu" href="https://github.com/shangril/janmesh.net">Contribute to the Janmesh project documentation &amp; translation</a><br/><a class="topmenu" href="/">Accueil</a> <a class="topmenu" href="/local-mesh">Un&nbsp;mesh&nbsp;local&nbsp;?</a> <a class="topmenu" href="/pourquoi-mesh">Pour&nbsp;quoi&nbsp;faire&nbsp;?</a><!--  <a class="topmenu" href="/journal">Journal&nbsp;du&nbsp;JanMesh</a> --> <a class="topmenu" href="/rejoindre">Rejoindre&nbsp;ou&nbsp;créer&nbsp;un&nbsp;meshlocal</a> <a class="topmenu" href="/logiciels">Logiciels du projet Janmesh</a><!--  <a class="topmenu" href="/janmeshers">Janmeshiens&nbsp;&amp;&nbsp;janmeshiennes</a> --> <a class="topmenu" href="/irc">IRC/Contact</a>
+<h1>Janmesh - Journal</h1>
+<h2>Retrouvez l'histoire du JanMesh, depuis le début</h2>
+<h2>Test applicatifs</h2>
+La messagerie instantannée via ZeroConf/Bonjour ne semble pas vouloir fonctionner avec le client Empathy. Après de brèves recherches sur internet il semble que le client Pidgin soit lui opérationnel pour opérer ce genre d'application. <br/>
+Le partage DAAP de Ryhtmbox reste à tester plus avant. La découverte de peers locaux pour le téléchargement de torrents avec Transmission reste complétement à tester. <br/>
+<h2>C'est parti</h2>
+(6 Février, pas tout à fait encore le petit matin)<br/>
+Ça y est, c'est parti, la documentation a été mise à jour, le Janmesh est <strong>officiellement opérationnel ! </strong>
+<h2>Mise à jour de la documentation</h2>
+(4 janvier 2016, matin)
+<br/>
+Après investigation, il s'avère que les adresses de type lien local fournissent un service acceptable pour l'attribution des adresses IPv4. Il n'est donc plus nécessaire de recourir à l'adressage statique dans la plage 10.0.0.0/8. La documentation a été mise à jour (dans la section "rejoindre Janmesh" de ce site)
+<h2>Mise à jour de la documentation</h2>
+(3 janvier 2016, milieu de soirée)
+<br/>
+Une sous section "documentation" a été crée dans la section <a href="/rejoindre">Rejoindre Janmesh</a> de ce site, elle est encore incomplète mais donne quelques indications. 
+<h2>Premiers tests</h2>
+(2 janvier 2016, fin d'après midi)
+<br/>
+Entre hier et aujourd'hui j'ai pu faire quelques tests. 
+<br/>
+Par rapport à ce qui était indiqué précédément, il s'avère que desactiver la connectivité IPv4 n'est pas praticable. <br/>
+A l'heure actuelle, il a été mis en place un réseau de type ad-hoc, sans la couche de routage olsrd, sans la couche d'accès et de chiffrage cjdns. <br/>
+Les deux machines répondent au ping et le dns distribué .local fonctionne. <br/>
+Le réseau est crée facilement via l'interface graphique de network-manager : ad-hoc, adresse IPv4 statique dans la plage 10.0.0.0/8, adresse IPv6 automatique. <br/>
+Pour le moment le réseau est chiffré au niveau du médium, via WPA. Ce ne sera pas nécessaire une fois que cjdns sera installé et que les connexions non-cjdns seront rejetés au niveau du firefall, comme expliqué dans le premier billet de ce journal. En effet, ceci aura pour conséquence de faire passer tout le trafic par cjdns, qui chiffre en point à point les échanges. 
+
+
+Ce qu'il est prévu pour le futur immédiat (tout de suite) : 
+<ol>
+<li>Installer Ubuntu Linux 14.04 sur anduril.local, pour avoir accès aux dépots logiciels contenant olsrd. Anduril est équipé pour le moment d'un OS obsolète. Les backups ont été fait, il va être possible de procéder à l'installation immédiatement après la mise en ligne de ce billet.</li>
+<li>Peut être, renommer seuil.local en autre chose, pour une cohérence dans les nom de machine. Peut être durandal.local . </li>
+<li>Installer olsrd sur les deux machines, pour que le routage mesh zeroconfiguration soit effectif. Entre deux machine, cela ne changera rien, mais ainsi ce sera prêt pour le moment ou un troisième noeud sera ajouté.</li>
+<li>Installer cjdns sur les deux machines, ajouter chacune d'elle dans les peers de l'autre</li>
+<li>Enfin, configurer le firewall ufw (via son interface graphique gufw, probablement) pour rejeter tout le traffic sauf le traffic cjdns sur les interfaces wlan. Ainsi, seules les interfaces vituelles tun0 de cjdns seront active et relaieront les transmission. À ce moment là il sera envisageable de stopper le chiffrement, devenu inutile, au niveau du médium, puisque la surcouche cjdns prendra à sa charge le chiffrement. </li>
+</ol>
+Une fois ces étapes remplies, il sera possible de tester quelques applications zeroconf, comme Salut, ddns ou DAAP, pour voir si elle fonctionnent sans configuration particulière sur le réseau IPv6 fournit par cjdns. C'est très probable qu'à ce moment, de la documentation supplémentaire sera ajoutée ici. Ce sera la première fois qu'une ressource complète en français, et même en n'importe quelle langue, sera rendue disponible pour la mise en place d'un mesh-local sécurisé et fiable. <br/>
+Les étapes pour le futur plus lointain seront
+<ol>
+	<li>De configurer anduril, qui est connecté, en plus de sa connexion wifi au mesh-local, à un réseau local privé via ethernet, qui lui fourni l'accès internet, pour qu'elle partage cette connectivité avec seuil.local (durandal), qui ne dispose que d'une seule interface réseau, une interface wifi, qui lui permet de se connecter au mesh</li>
+	<li>D'ajouter un troisième noeud au réseau, configurer pour communiquer avec les deux premiers</li>
+	<li>Ce troisième noeud se connectera au meshlocal via wifi, mais dispose également d'une prise ethernet. Il faudra alors le configurer pour qu'il partage sa connectivité mesh via cette interface, et la distribue à un quatrième noeud du réseau (orcrist), qui lui est connecté en wifi au réseau privé local, mais dispose d'une interface ethernet disponible</li>
+</ol>
+Pistes ultérieures pour un futur encore indéfini : 
+<oL>
+	<li>La version 15 de Network-Manager gère la création de réseau wifi en mode Access Point. C'est le seul mode reconnu par les périphériques Android. Si cette version est packagée dans Ubuntu 16.04 qui sortira en avril, il peut être intéressant de basculer le réseau depuis le mode Ad-Hoc vers les modes Master/Secondary, qui est le seul supporté par les téléphones et tablettes android et iOS. Ainsi leurs utilisateur verront son nom de réseau (SSID) qui est l'adresse ce ce site. Idéalement, il faudrait au final ouvrir le port 80 et le router vers un serveur HTTP d'une des machine du mesh, pour que les curieux qui se connectent au réseau puissent voir une petite plaquette reprenant les informations clé de ce site. </li>
+
+</oL>
+Et c'est tout pour le moment !
+<h2>Journal du déploiement initial</h2>
+<h3>Exemple de configuration de cjdns, à tester, pour former un réseau mesh entre quelques machines, via wifi, sous Linux</h3>
+<div>(31 décembre 2015)</div>
+Voici ce qui est prévu autour de Janmesh pour le futur à court terme
+<h3>Topologie de test</h3>
+Le mesh du déploiement initial est composé de trois machine. <br/>
+<h4>étapes primordiales du déploiement du meshlocal : </h4>
+<h5>Step 1 : Chaque machine bloque, au niveau du firewall logiciel intégré au système d'exploitation, la totalité du trafic venant de son interface wifi, <em>à l'exception du port utilisé par cjdns</em></h5>
+<ol>
+<li>Installer le firewall gufw depuis la logithèque (software-center) ou avec la commande <code>sudo apt-get install gufw</code> (nécessite les droits administrateur)</li>
+<li>Lancer gufw (nécéssite les droits administrateur) et activer le firewall</li>
+<li>Créer une nouvelle règle -> avancer -> refuser -> les deux -> interface : wlan0 (ou autre wlan correspondant à l'interface wifi qui sera utilisée pour le mesh) -> entrée <strong>et</strong> sortie : toutes les IPs <br/>(TODO : indiquer ici l'adresse avec masque qui signifie "toutes les IPs"... 0/128 ?)<br/> -> plage de ports (pour les deux) : <br/><code>1-(X-1),(X+1)-65535</code><br/> où X est le numéro de port où cjdns sera à l'écoute <br/>(TODO:indiquer le port par défaut)</li>
+<li>Valider</li>
+<li>Quitter gufw</li>
+</ol>
+<h5>Step 2 : scanner la présence d'éventuels services sensibles qui serait à l'écoute sur un port ouvert, et désactiver l'interface utilisée pour le mesh au cas par cas. <br></h5>
+Voir <a href="https://docs.meshwith.me/config/network-services.html">Securing your system</a> sur la documentation Hyperborea (en anglais)<br/>
+<h5>Step 3 : Chaque machine souhaitant être membre du JanMesh opère un réseau wifi ad-hoc totalement public. Le mot de passe WPA est le SSID (nom du réseau), qui est l'adresse de la page d'accueil du site web que vous lisez en ce moment même.</h5><br/>
+Exemple en GUI sous Lubuntu, Ubuntu et autres utilisant network manager : 
+<ol>
+<li>CLic droit sur l'icone "réseau" dans la zone des notifications. Se déconnecter d'un éventuel réseau. Activer éventuellement le wifi. Sélectionner "Créer un nouveau réseau wifi"</li>
+<li>Nom du réseau : <code>http://janmesh.clewn.org</code><br/>
+Sécurité wifi : WPA personnel<br/>
+Mot de passe : <code>http://janmesh.clewn.org</code><br/>
+Valider. 
+</li>
+</ol>
+<h5>Step 4 : Les adresses des interfaces dans le réseau wifi de bas niveaux sont strictement IPv6. Les adresses sont obtenues automatiquement via la technique de la <em>stateless address autoconfiguration</em> que propose le protocole IPv6. Le protocole IPv4 n'est pas utilisé, sauf pour la liaison boucle locale interne à chaque machine. </h5><br/>
+<ol>
+<li>Dans la zone des notifications, clic droit sur l'icone réseau, sélectionner "modification des connexions"</li>
+<li>Choisir la connection réseau sans fil "http://janmesh.clew.org"</li>
+<li>Dans l'onglet IPv4, changer la méthode "partagé entre plusieurs ordinateurs" : choisir "lien local uniquement"</li>
+<li>Dans l'onglet IPv6, changer la méthode pour pour "automatique, adresses uniquement"</li>
+<li>Valider</li>
+</ol>
+<h5>Step 5 : Chacun de ces noeuds wifi met en oeuvre une surcouche ANSI niveau 3 : olsrd, pour assurer un routage en mode mesh : les paquets prennent la route la plus efficace. Si un noeud quitte le réseau, de nouvelles routes sont automatiquement calculées. Même chose si un noeud rejoint le réseau.</h5> <br/>
+Dans un terminal, entrer les commandes (nécessite les droits adminitrateurs)<br/>
+<code>sudo apt-get install olsrd</code><br/>
+<code>sudo cp /etc/olsrd/olsrd.conf /etc/</code><br/>
+ouvrir le fichier /etc/olsrd.conf et vérifier que la section Interface ressemble bien à quelque chose comme<br/>
+<code>Interface "wlan0"
+{
+Ip4Broadcast 255.255.255.255
+}</code><br/>
+Où <code>wlan0</code> est bien le nom de l'interface réseau qui servira à la connexion Mesh. 
+Lancer le service avec la commande
+<code>
+sudo olsrd
+</code>
+(nécessite les droits utilisateur. Cette commande sera à exécuter à nouveau si la machine doit éventuellement redémarrer)
+<a href="http://www.kwalinux.nl/what-a-mesh/1129/">Plus d'information sur olsrd</a> (en anglais)
+<h5>Step 6 : Chacune de ces machines met en oeuvre au niveau application, le protocole cjdns. Chaque machine se déclare comme pair d'au moins une autre des machines du mesh</h5> 
+<h6>Installer et démarrer cjdns</h6>
+Voir <a href="https://docs.meshwith.me/install/debian-jessie.html">Installer sous Debian Jessie</a> (en anglais) pour la liste des commandes, mais, 
+-sous Ubuntu vous devrez d'abord taper la commande <code>sudo -i</code> pour devenir administrateur ;
+-il faudra entrer <code>apt-get install</code> au lieu de <code>apt-install</code>
+-il faudra ajouter à la liste des paquets à instaler (build-essentials, nodejs...) systemd-services
+<h6>Ajouter chacune des autres machine comme pair</h6>
+Voir <a href="https://docs.meshwith.me/config/configure.html">Configurer cjdns</a> (en anglais). <br/>
+TODO : Traduire tout ça et rédiger
+<hr/>
+Pour ajouter une machine supplémentaire au mesh : reprendre chacune des étapes et trouver au moins une machine à portée de wifi dont l'administrateur accepte comme pair la machine demandant à entrer sur le réseau. 
+<hr/>
+<h4>à titre d'exercice : </h4>
+-Une machine est connecté au meshlocal par le wifi, et à un lan privé connecté à internet via une liaison filaire. <br/>
+-Une machine est connecté au meshlocal et uniquement au meshlocal. La machine précédente autorise le partage de sa connection filaire avec elle. <br/>
+-une machine est utilisée comme meshbox : connectée au mesh via le wifi, elle agit comme passerelle pour une tierce machine, lui fournissant l'accès au JanMesh via sa connexion filaire. Cette tierce machine ne requiert aucune configuration particulière. <br/>
+
+<img class="mainimg" src="janmesh-initial-setup-1.png"/>
+<img class="mainimg" src="janmesh-initial-setup-2.png"/>
+<img class="mainimg" src="janmesh-initial-setup-3.png"/>
+<h2>Salon de discussion IRC #janmesh</h2>
+Si vous avez des questions, ou si vous souhaitez simplement vous informer sur le projet, <a href="./irc">rejoignez le salon #janmesh sur Freenode</a> pour discuter avec les membres du projet. <br/>
+<hr/>
+<a class="topmenu" href="/">Français</a> <a class="topmenu" href="/english">English</a> <a class="topmenu" href="https://github.com/shangril/janmesh.net">Contribute to the Janmesh project documentation &amp; translation</a><br/><a class="topmenu" href="/">Accueil</a> <a class="topmenu" href="/local-mesh">Un&nbsp;mesh&nbsp;local&nbsp;?</a> <a class="topmenu" href="/pourquoi-mesh">Pour&nbsp;quoi&nbsp;faire&nbsp;?</a><!--  <a class="topmenu" href="/journal">Journal&nbsp;du&nbsp;JanMesh</a> --> <a class="topmenu" href="/rejoindre">Rejoindre&nbsp;ou&nbsp;créer&nbsp;un&nbsp;meshlocal</a> <a class="topmenu" href="/logiciels">Logiciels du projet Janmesh</a><!--  <a class="topmenu" href="/janmeshers">Janmeshiens&nbsp;&amp;&nbsp;janmeshiennes</a> --> <a class="topmenu" href="/irc">IRC/Contact</a>
+<div>&copy; les contributeurs de Janmesh.net - À l'exception des photographies de la section <a href="/janmeshers">Janmeshiens &amp; Janmeshiennes</a>, le contenu de ce site est placé sous licence libre <a href="http://creativecommons.org/licenses/by-sa/3.0/fr">Creative Commons BY-SA</a> </div>
+</body>
+</html>

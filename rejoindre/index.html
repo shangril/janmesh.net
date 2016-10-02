@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Janmesh - Rejoindre Janmesh</title>
+ <meta charset="UTF-8"> 
+ <style>
+ .mainimg{
+	 width:40%;
+	 margin-left:30%;
+	 margin-right:30%;
+ }
+ body {
+	 font-family:sans-serif;
+	 margin-left:8%;
+	 margin-right:8%;
+	
+ }
+ div  {
+	 font-family:sans-serif;
+	 margin-top:3%;
+	 margin-left:3%;
+	 margin-right:3%;
+ }
+ .topmenu {
+	 background-color:grey;
+	 padding: 4px;
+	 margin-top:2%;
+	 }
+	 	a {
+		text-decoration:none;
+	}
+
+ </style>
+</head>
+<body>
+<a class="topmenu" href="/">Français</a> <a class="topmenu" href="/english">English</a> <a class="topmenu" href="https://github.com/shangril/janmesh.net">Contribute to the Janmesh project documentation &amp; translation</a><br/><a class="topmenu" href="/">Accueil</a> <a class="topmenu" href="/local-mesh">Un&nbsp;mesh&nbsp;local&nbsp;?</a> <a class="topmenu" href="/pourquoi-mesh">Pour&nbsp;quoi&nbsp;faire&nbsp;?</a><!--  <a class="topmenu" href="/journal">Journal&nbsp;du&nbsp;JanMesh</a> --> <a class="topmenu" href="/rejoindre">Rejoindre&nbsp;ou&nbsp;créer&nbsp;un&nbsp;meshlocal</a> <a class="topmenu" href="/logiciels">Logiciels du projet Janmesh</a><!--  <a class="topmenu" href="/janmeshers">Janmeshiens&nbsp;&amp;&nbsp;janmeshiennes</a> --> <a class="topmenu" href="/irc">IRC/Contact</a>
+<hr/>
+<a href="/rejoindre" class="topmenu">Rejoindre Janmesh</a> : <a class="topmenu" href="/rejoindre/doc">Documentation</a>
+
+<h1>Janmesh - Rejoindre le mesh local</h1>
+<h2>Pour démarrer</h2>
+<h3>Sur votre machine ou via une meshbox</h3>
+<h4>Sur votre machine</h4>
+Si vous avez un minimum de connaissances techniques, vous pouvez configurer le routage mesh sur un ordinateur ordinaire. Janmesh utilise la pile réseau <em>cjdns</em> du projet <a href="https://hyperboria.net/">Hyperboria</a> qui fournit une allocation automatique d'adresse IPv6, un routage basée sur une hashtable distribuée (DHT), et un chiffrement point-à-point automatique. Cjdns fonctionne sous Linux (la configuration la plus simple à mettre en place), mais également MacOS, Windows, FirefoxOS, Android...<br/>
+Pour plus d'information référez-vous à <a href="./doc">notre documentation</a>
+<h4>Via une meshbox</h4>
+Une "meshbox" est un périphérique, qui peut être, par exemple, une ancienne tour, un ancien ordinateur portable ou netbook, ou un modem routeur même ancien, qui dispose de deux interfaces réseaux, l'une (souvent, du wifi) servant à se connecter à Janmesh, et l'autre étant connectée à votre ordinateur pour que vous accédiez aux services du mesh local sur celui-ci. <br/>
+Si vous avez une machine ancienne, que vous voulez en faire une meshbox, vous trouverez plus d'information dans <a href="./doc">notre documentation</a>. <hr/>
+Autrement, n'hésitez pas à nous contactez, si vous avez un ancien appareil que vous pouvez vouer à cette tâche, il y aura peut être un janmesher prêt à vous aider à y installer un système dédié pour en faire une meshbox, ou reconfigurer un ancien modem routeur dans ce but. <br/>
+Également, vous pouvez consultez <a href="/irc/#classified">nos petites annonces</a> pour voir s'il n'y n'a pas à vendre une machine préconfigurée en meshbox. 
+<h3>Vous avez le matériel configuré pour le mesh ? Et ensuite ? </h3> 
+Il y a ensuite plusieurs façons de rejoindre un mesh local. <br/>La seule chose à savoir c'est qu'il faut assurer une connexion réseau avec une autre machine déjà sur le mesh. <br/>Cette connexion peut être assurée via un tunnel au travers d'internet, une liaison wifi, une liaison CPL ou même une liaison filaire Ethernet voire (si vous avez les moyens) une liaison radio longue portée Wimax. 
+<h3>Tunnel via internet</h3>
+Avant même d'être à portée de wifi, vous pouvez d'ore et déjà rejoindre le mesh local en mettant en place un tunnel au travers de votre connexion internet. La seule chose à faire est de trouver un pair ; pour celà, il suffit de nous contacter. 
+<h3>Wifi</h3>
+Si vous pouvez voir dans votre liste de réseau wifi à portée un réseau dont le nom est <em>http://janmesh.net</em>, bravo, vous êtes à portée d'un des nœuds du réseau wifi Janmesh. Vous pouvez configurer une machine avec une interface dédiée à la connexion au mesh-local, ou monter (ou nous faire monter :) ) une meshbox, pour rejoindre le réseau. 
+<h3>CPL</h3>
+La téchnologie CPL (courant porteur en ligne) permet de communiquer, avec des débits qui peuvent être très bon, entre machines situées sur le même réseau électrique que vous (connectées au même transformateur moyenne tension). Idéal pour rejoindre un noeud du mesh qui se trouve dans votre quartier mais est trop loin pour le wifi. Le principe reste le même, utiliser une meshbox ou configurer cjdns sur votre ordinateur. Cependant, il faut compter avec l'achat de deux interfaces CPLs pour faire la liaison entre vous et la machine qui voudra bien "peerer" Janmesh avec vous (comptez un peu moins de 40 euros). 
+<h3>Ethernet</h3>
+Le meilleur moyen d'avoir un débit imbattable (jusqu'à 1000Mbps) avec un voisin immédiat est encore de tirer un cable ethernet entre les deux logements, pour connecter deux meshboxs ou ordinateurs équipés chacun d'une prise Ethernet dédié à établir cette liaison. Si vous êtes un peu bricoleur et que votre voisin fait partie du Janmesh, c'est peut-être la bonne solution pour vous. 
+<h2>Journal du déploiement initial</h2>
+Le  <a class="topmenu" href="/journal">journal&nbsp;du&nbsp;Janmesh</a> détaille point par point les expérimentations locales qui ont donné lieu à la création de ce site. 
+<h2>Salon de discussion IRC #janmesh</h2>
+Si vous avez des questions, ou si vous souhaitez simplement vous informer sur le projet, <a href="./irc">rejoignez le salon #janmesh sur Freenode</a> pour discuter avec les membres du projet. <br/>
+<hr/>
+<a class="topmenu" href="/">Accueil</a> <a class="topmenu" href="/local-mesh">Un&nbsp;mesh&nbsp;local&nbsp;?</a> <a class="topmenu" href="/pourquoi-mesh">Pour&nbsp;quoi&nbsp;faire&nbsp;?</a><!--  <a class="topmenu" href="/journal">Journal&nbsp;du&nbsp;JanMesh</a> --> <a class="topmenu" href="/rejoindre">Rejoindre&nbsp;ou&nbsp;créer&nbsp;un&nbsp;meshlocal</a> <a class="topmenu" href="/sur-janmesh">Une&nbsp;fois&nbsp;qu'on&nbsp;y&nbsp;est</a><!--  <a class="topmenu" href="/janmeshers">Janmeshiens&nbsp;&amp;&nbsp;janmeshiennes</a> --> <a class="topmenu" href="/irc">IRC/Contact</a><br/>
+<div>&copy; les contributeurs de Janmesh.net - À l'exception des photographies de la section <a href="/janmeshers">Janmeshiens &amp; Janmeshiennes</a>, le contenu de ce site est placé sous licence libre <a href="http://creativecommons.org/licenses/by-sa/3.0/fr">Creative Commons BY-SA</a> </div>
+</body>
+</html>
