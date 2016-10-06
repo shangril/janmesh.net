@@ -39,6 +39,73 @@
 <br/><hr/>
 <a class="topmenu" href="/rejoindre">Rejoindre Janmesh</a> > <a class="topmenu" href="/rejoindre/doc">Documentation</a> > Linux
 <h1>Janmesh - Documentation Linux</h1>
+<h2>Tutorial numéro 4 : bloquer l'accès à un certain service de votre machine pour qu'il ne soit pas accessible depuis Janmesh</h2>
+Exemple pour un mesh sur wifi (wlan0) où l'on souhaite bloquer l'accès à un serveur web à l'écoutel (port 80) :<br/>
+$ sudo ufw deny in on tun0  to any port 80 
+<h2>Tutorial numéro 3 : partager la connexion internet vers une machine qui n'a qu'une interface réseau connectée à Janmesh pour toute connectivité </h2><br/>
+<br/>À COMPLETER<br/>
+<br/>
+<br/>
+<h2> Tutorial numéro 3 : Ajouter une machine à un réseau Janmesh préexistant en utilisant la ligne de commande </h2><br/>
+<br/>
+Si vous avez lu le tuto numéro 1, vous n'aurez pas trop de problème à comprendre ce que signifient ces commandes pour ajouter une machine de plus au janmesh : <br/>
+<br/>
+<br/>
+$ nmcli connection add con-name janmesh autoconnect yes type wifi ifname wlan0 mode adhoc ssid http://janmesh.net<br/>
+<br/>
+<br/>
+$ nmtui edit janmesh<br/>
+ -> ipV4 -> lien local ; -> ipv6 -> automatique <br/>
+<br/>
+$ nmcli con up id janmesh<br/>
+<br/>
+$ sudo apt-get install olsrd<br/>
+<br/>
+$ sudo nano /etc/olsrd/olsrd.conf<br/>
+<br/>
+-> ajouter une section<br/>
+<br/>
+Interface "wlan0" {<br/>
+Ip4Broadcast 255.255.255.255<br/>
+} <br/>
+<br/>
+$ sudo olsrd<br/>
+<br/>
+$ sudo apt-get install git<br/>
+<br/>
+puis téléchager, compiler et installer cjdns :<br/>
+<br/>
+$ cd /opt<br/>
+$ sudo git clone https://github.com/cjdelisle/cjdns.git<br/>
+$ cd cjdns<br/>
+$ sudo ./do<br/>
+$ sudo ln -s /opt/cjdns/cjdroute /usr/bin<br/>
+$ sudo su<br/>
+# (umask 077 && ./cjdroute --genconf > /etc/cjdroute.conf)<br/>
+<br/>
+<br/>
+Puis démarrez cjdns avec la commande<br/>
+# cjdroute < /etc/cjdroute.conf<br/>
+(nouveau dans Ubuntu 16.04 : ça ne marchera pas avec Sudo, il faut encore être en sudo su)<br/>
+# exit<br/>
+<br/>
+Notez le numéro de port qui suit "your.external.ip.goes.here:" dans /etc/cjdroute.conf<br/>
+<br/>
+$ sudo ufw enable<br/>
+$ sudo ufw deny in on wlan0<br/>
+$ sudo ufw allow in on wlan0 to any port 65011<br/>
+$ sudo ufw deny out on wlan0<br/>
+$ sudo ufw allow out on wlan0 from any port 65011<br/>
+<br/>
+$ nmcli con up id janmesh<br/>
+<br/>
+$ sudo nano /etc/init.d/janmesh<br/>
+<br/>
+Nouveau dans Ubuntu 16.04 : il faut rendre le script exécutable : 
+<br/>
+$ sudo chmod +x /etc/init.d/janmesh<br/>
+<br/>
+$ sudo update-rc.d janmesh defaults
 <a name="2"/><h2>Tutorial numéro 2 : Configurer une machine en meshbox connectée à un réseau Janmesh pré-existant et partage de sa connectivité avec une autre machine : </h2>
 Le but de ce tutorial est de de configurer une machine en mode pure meshbox, connectée au réseau Janmesh préexistant se trouvant à portée. <br/>
 À COMPLÉTER
