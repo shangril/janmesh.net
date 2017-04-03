@@ -40,8 +40,9 @@
 <a class="topmenu" href="/english/rejoindre">Rejoindre Janmesh</a> > <a class="topmenu" href="/english/rejoindre/doc">Documentation</a> > Linux
 
 <hr/><strong>This page needs to be translated from the corresponding French section which will feature the most recent informations. Help is welcome</strong><!-- do not remove this message--><hr/>
-<hr/><strong>This is a raw translation, it's needing some real proofreading.</strong>	
-<h1>Janmesh - Documentation Linux</h1>
+<hr/><strong>This is a raw translation, it needs some real proofreading.</strong>
+	
+<h1>Janmesh - Linux Documentation</h1>
 <h2>Tutorial n°5 : Prevent some services to access your computer, prevent them to be accessible thought Janmesh</h2>
 Exemple for a mesh with a wifi (wlan0) in wich we want to block a listening web server (port 80) :<br/>
 $ sudo ufw deny in on tun0 to any port 80 
@@ -122,91 +123,94 @@ The point of this tutorial is to inter-connect two computers throught a new wifi
 <h4>The adressing</h4>
 We will use local connection adresses. It's sufficient for the scale of most urban areas, because this methode allows about 65000 adresses, and most of the time one household will only needs one adress.
 <br/>
-As a matter of fact inter-connecting different network segments will need two dedicated interfaces, for exemple to operate long-range liaison, connecting two network segments with eatch theirs 65 000 available adresses.<br/>
+As a matter of fact inter-connecting different network segments will need two dedicated interfaces, for example to operate long-range liaison, connecting two network segments with each theirs 65 000 available adresses.<br/>
 <h5>On the scale of a city</h5>
 On the scale of a big city, it would be more complicated : we can cut the network into segments by neighbourhood or district, but every segment must its own essid because the wifi coverage of the segments will be overlapping eatch other.
 <br/>
-Par exemple, ajouter "Lyon 1er", "Lyon 2eme", "Lyon 3eme" au essid pour les différentes aires géographiques composant la metropole lyonnaise.<br/>
-Souvenez vous que le réseau wifi n'est qu'une sous couche, et que le réseau Janmesh en lui même utilise cjdns, qui est un protocole de couche plus haute, utilisant les plages d'adresses infiniment plus grandes d'IPv6, pour router les paquets entre les différentes machines.<br/> 
-<h3>Les machines utilisées pour le déploiement initial</h3>
-<h4>Machine numéro 1</h4>
+For example : add "Lyon 1er", "Lyon 2eme", "Lyon 3eme" in the essid of the areas of the city of Lyon.<br/>
+Remenber that the wifi network is just a layer, and Janmesh is acually using cjdns, wich is a higher layer protocol, who is using the widest range of adresses of the IPV6 protocol to route packages between machines.<br/> 
+<h3>Computers used for the initial deploy</h3>
+<h4>Machine 1</h4>
 
-Nom d'hôte : durandal.local<br/>
-Interfaces réseau : 1 wifi b/g/n pour opérer le mesh-local<br/>
-Note : cette machine récupèrera l'accès au réseau privé domestique et donc à internet via un partage de connexion fourni par la machine anduril.local<br/>
-Alimentation sur batterie : Oui<br/>
+Host's name : durandal.local<br/>
+Network interfaces : 1 wifi b/g/n (to operate the local mesh)<br/>
+Note : this machine will get access to a home private network, so to internet throught a shared connexion provided by anduril.local.<br/>
+Power to battery : Yes<br/>
 
-<h4>Machine numéro 2</h4>
+<h4>Machine 2</h4>
 
-Nom d'hôte : anduril.local<br/>
-Interfaces réseau : 1 wifi b/g/n pour opérer le mesh-local ; 1 ethernet pour accès au réseau privé domestique et à internet<br/>
-Note : cette machine partage son accès au réseau domestique et donc à internet avec durandal.local<br/>
-Alimentation sur batterie : Non<br/>
+Host's name : anduril.local<br/>
+Network interfaces : 1 wifi b/g/n (to operate the local mesh) ; 1 ethernet access to the home private network and internet<br/>
+Note : this computer will share its home network access and internet access to durandal.local.<br/>
+Power to battery  : No<br/>
 
-<h3>Etape 0 : installer les logiciels nécessaire</h3>
-Pour chacune des machines (il faut qu'elle soit connectée à internet) entrer la commande
+<h3>Step 0 : install softwares requiered</h3>
+For each computer enter the command line (need an internet access) : 
 <code>$ sudo apt-get install olsrd gufw</code><br/>
-Ceci installera le routage dynamique olsrd et le gestionnaire de pare feu gufw sur chaque machine. 
-<h3>Etape 1 : interconnecter anduril et durandal</h3>
+This will install the olsrd dynamic routing et the firewall manager gufw.
+	
+<h3>Step 1 : inter-connecting anduril and durandal</h3>
 
-Avant toute chose, mettons un nom cohérent avec celui des autres machines du propriétaire. Les systèmes moderne supportent les noms d'hotes en domaine .local, ce serait dommage de s'en priver. Pour les machines que j'administre, j'ai choisi des noms d'épées. D'une manière générale, chaque utilisateur du réseau devrait choisir un champ lexical unique sur le mesh pour nommer ses machines (par exemple, ici, les épées) pour éviter au maximum les doublons de nom d'hôtes sur Janmesh.<br/>
+Before anything else, let's put a logical name to our machines. Modern systems can handle host name with domain .local, it will be ashame to not use it. For machines I'm running, I chose sword's names. Every user of the network should use names from a unique lexical field (in this case, swords) to avoid	duplicates on the hosts's names in the Janmesh network. <br/>
 
-
-Par exemple sur durandal.local : <br/>
+For example, on durandal.local : <br/>
 
 <code>$ sudo unity-control-center</code>
 
-(sudo vous demandera votre mot de passe)<br/>
+(sudo will ask your password)<br/>
 
+Then in the first tab of the section "about this computer", change the host name to "durandal"
 Puis dans le premier onglet de la section "à propos de cet ordinateur", changer le nom d'hote pour durandal
 
 <hr/>
 
-puis, pour durandal, et pour anduril <br/>
+Therefore, on durandal and pour anduril <br/>
 
-
-<h4>Etape 1.1 : créer le réseau wifi</h4>
+<h4>Step 1.1 : create the wifi network</h4>
 <br/>
-clic droit sur l'icone réseau dans la bar de notification -> modification des connexions<br/>
-onglet wifi -> nouvelle<br/>
-nom de la connexion -> janmesh<br/>
-onglet général -> accessible à tous les utilisateurs, connecter automatiquement si disponible<br/>
-onglet wifi -> mode ad hoc, essid http://janmesh.net<br/>
-onglet securité wifi -> wpa personnel -> entrez un mot de passe de votre choix. Il ne sera utilisé que le temps de configurer le réseau, ensuite le wifi passera en mode "ouvert" car le chiffrage et l'authentification seront gérés pas cjdns<br/>
-onglet ipv4 -> methode : lien-local uniquement<br/> 
-onglet ipV6 -> automatique<br/> 
-valider<br/>
-dans un terminal entrer la commande<br/>
+Right clic on the network icone in the notification bar -> connexions's modifications<br/>
+Wifi tab -> new<br/>
+Connexion name -> janmesh<br/>
+General tab -> accessible à tous les utilisateurs, connecter automatiquement si disponible<br/>
+Wifi tab -> ad hoc mode, essid http://janmesh.net<br/>
+Wifi Security tab -> personnal wpa -> enter the password of your choice. It will only be used for the network configuration, then the wifi will be open because encryption and authentification will be handle by cjdns.<br/>
+Ipv4 tab -> methode : local-link only<br/> 
+Ipv6 tab -> auto<br/> 
+Validate<br/>
+In a command prompt enter :<br/>
 <code>$ nmcli con up id janmesh</code>
 <br/>
-Une fois cette étape réalisée sur les deux machines, vous pouvez tester qu'elles sont bien connectées avec la commande, par exemple depuis durandal : 
+Once this done on the two computers, you can test the connexion between then with the command (from durandal) :
 <br/>
 <code>$ ping anduril.local</code><br/>
-Notez qu'il peu avoir un certain délai pour que la propagation du nom d'hote anduril.local se fasse. 
-<h4>Etape 1.2 activer le routage dynamique olsrd</h4>
-olrsd permettra à chaque paquet transitant sur le réseau wifi de prendre la route la plus efficace, de machine en machine<br/>
-Modifier le fichier de configuration d'olsrd, /etc/olsrd.conf : <br/>
+Note there can be a bit of delay for the host name anduril.local propagation to be effective. 
+	
+<h4>Step 1.2 : Activate olsrd dynamic routing</h4>
+olrsd will allows every packages passing thought the wifi network to take the better route, from computer to computer.<br/>
+Change the olsrd configuration file, /etc/olsrd.conf : <br/>
 <code>$ gksu gedit /etc/olsrd.conf</code>
-en y ajoutant une section 
+Add a section
 <code>
 Interface "wlan0" {<br/>
 	Ip4Broadcast 255.255.255.255<br/>
 }
 </code>
-(dans la pratique, wlan0 sera probablement le nom de votre interface wifi, mais il peut être différent. Par exemple sur durandal elle s'appelle wlan5. Utilisez iwconfig pour connaitre le nom (wlan-quelquechose) de votre interface si vous n'êtes pas sûr)<br/>
-Puis lancer le daemon olsrd en arrière plan : <br/>
+(The name of your wifi interface will probably be "wlan0", but it can be different. For example on durandal it is called wlan5. You can use iwconfig to know the name of your wifi interface if you're not sur of its name (should be wlan-something).<br/>
+Then launch the olsrd daemon in background : <br/>
 <code>
 $ sudo olsrd
 </code>
-<h3>Etape 2 : installer et configurer cjdns sur chaque machine</h3>
-À COMPLÉTER<br/>
-<h4>Installation de cjdns</h4>
-Pour anduril : </br/>
-Avant toute chose, il nous faut installer git qui nous permettra de télécharger le code source de cjdns, que nous allons ensuite compiler<br/>
+	
+<h3>Step 2 : install and configuration of cjdns on every computers</h3>
+Need to be completed<br/>
+<h4>Cjdns installation</h4>
+On anduril : <br/>
+Before anything, we need to install git to download the cjdns's source, that we will compile next. <br/>
 <code>
 $ sudo apt-get install git<br/>
 </code>
-puis téléchager, compiler et installer cjdns :<br/>
+Download, compile and install cjdns :<br/>
+<code>
 $ cd /opt
 $ sudo git clone https://github.com/cjdelisle/cjdns.git<br/>
 $ cd cjdns<br/>
@@ -216,37 +220,37 @@ $ sudo su <br/>
 # (umask 077 &amp;&amp; ./cjdroute --genconf > /etc/cjdroute.conf)<br/>
 # exit <br/>
 </code>
-Puis démarrez cjdns avec la commande <code>$ sudo cjdroute &lt; /etc/cjdroute.conf</code><br/>
-Enfin, pour permettre à durandal de télécharger cjdns depuis anduril, installer ssh sur anduril :
+Then launch cjdns with <code>$ sudo cjdroute &lt; /etc/cjdroute.conf</code><br/>
+Finally, to allow durandal to download cjdns from anduril, you need to install ssh on anduril :
 <code>
 $ sudo apt-get install ssh<br/>
 </code>
-Pour durandal : <br/>
-durandal ne possède que sa connection au janmesh comme seule connectivité. Impossible donc de télécharger cjdns depuis internet. Nous allons donc le récupérer depuis anduril  : <br/>
+On durandal : <br/>
+Durandal only have its connexion to Janmesh, so it can't download cjdns from internet. We have to get it from anduril :<br/>
 <code>
 $ cd /usr/bin<br/>
-$ sudo sftp &lt;votre nom d'utilisateur sur durandal&gt;@anduril.local:/usr/bin/cjdroute<br/>
+$ sudo sftp &lt;username on durandal&gt;@anduril.local:/usr/bin/cjdroute<br/>
 </code>
-Puis générer le fichier de configuration avec les commandes : 
+Then generate the configuration file with :
 <code>
 $ sudo su <br/>
 # (umask 077 &amp;&amp; ./cjdroute --genconf > /etc/cjdroute.conf)<br/>
 # exit <br/>
 </code>
-Puis démarrez cjdns avec la commande <code>$ sudo cjdroute &lt; /etc/cjdroute.conf</code><br/>
+Launch now cjdns with : <code>$ sudo cjdroute &lt; /etc/cjdroute.conf</code><br/>
 
 
-<h3>Etape 3 : bloquer le traffic non-cjdns au niveau du pare-feu, passer le réseau wifi en mode ouvert</h3>
-Il va vous falloir pour chacune des machines, chercher dans le fichier de configuration de cjdns sur quel port celui-ci opère. Vous pouvez ouvrir ce fichier avec la commande 
+<h3>Step 3 : block any non-cjdns traffic and open the wifi</h3>
+We will have to, for each machines, search into the congiguration file of cjdns wich port it's using. you can open this file with the command :
 <code>gksu gedit /etc/cjdroute.conf</code>
-Le numéro de port se trouve sur la ligne 
+The port number is on the line :
 <code>
 "your.external.ip.goes.here:65011": {<br/>
 </code>
-Dans ce cas précis ce sera 65011. Le numéro est généré aléatoirement et ne sera pas le même sur votre propre installation. Notez le, nous allons en avoir besoin. <br/>
-Il s'agit de bloquer tout trafic sur l'interface wifi utilisée pour le mesh, à l'exception du port cjdns (65011 dans notre cas). 
-Ce numero sera donc à adapter selon votre numéro de port cjdns que vous avez obtenu plus haut. <br/>
-Le nom de l'interface réseau wifi sera probablement wlan0. Si ce n'est pas le cas, vous l'obtiendrez avec la commande <code>iwconfig</code>
+In this case, it will be 65011. The number is randomly generated and won't be the same on your hardware. Write it down, we will need it !<br/>
+We want here to block all the trafic on the wifi interface used by the mesh, except for the cjdns's port (65011 in this case).
+This number in the next lines should be adjust with your cjdns port number.<br/>
+The name of the wifi interface should be wlan0. If it's not, you can have the actual name with the commande <code>iwconfig</code>
 <code>
 $ sudo ufw enable<br/>
 $ sudo ufw deny in on wlan0<br/>
@@ -254,17 +258,19 @@ $ sudo ufw allow in on wlan0 to any port 65011<br/>
 $ sudo ufw deny out on wlan0<br/>
 $ sudo ufw allow out on wlan0 from any port 65011<br/>
 </code>
-Passer le réseau wifi en mode ouvert : <br/>
-Dans le gestionnaire de connexion réseau, éditer la connexion "Janmesh" et remplacer "sécurité: WPA" par "sécurité: ouvert"
-<h3>Etape 5 : partager la connectivité au réseau local privé et à internet d'anduril avec durandal</h3>
-À COMPLÉTER
-<h3>Etape 6 : rendre les changements permanent en configurant un script à exécuter au démarrage de la machine</h3>
-Note : cette méthode utilise upstart, qui est le système de gestion des services par défaut d'Ubuntu 14.04. Pour les versions supportés sur le long terme, systemd deviendra le gestionnaire par défaut à partir d'Ubuntu 16.04, il sera préférable alors de l'utiliser</br>
-Dans le répertoire /etc/init.d, créez un fichier texte nommé janmesh : 
+How to open the wifi network :<br/>
+In the network manager, edit the "Janmesh" connexion, and replace "security: WPA" by "security: open".
+	
+<h3>Step 5 : share the home private network and the internet network of anduril to durandal</h3>
+NEED TO BE COMPLETED
+	
+<h3>Step 6 : configure a script to make the changes permanent</h3>
+Note : this methode will use upstart, it's the default services's management system in Ubuntu 14.04. For the long terme supported versions, systemd is the default manager since Ubuntu 16.04, it's better to use it.</br>
+Into the folder /etc/init.d, create a text file nammed janmesh : 
 <code>
 $ gksu gedit /etc/init.d/janmesh
 </code>
-et y copier le contenu suivant : 
+And copy in it what follows :
 <code>
 #!/bin/sh<br/>
 case $1 in <br/>
@@ -279,16 +285,16 @@ case $1 in <br/>
 		
 esac
 </code>
-sauvegardez puis quittez gedit. <br/>
-Vous pourrez désormais initier ou stopper la connexion Janmesh avec les commandes 
+save and close.<br/>
+You can now start or stop the janmesh connexion with :
 <code>
 $ sudo /etc/init.d/janmesh start
 </code>
-et
+and
 <code>
 $ sudo /etc/init.d/janmesh stop
 </code>
-La dernière étape est de démarrer Janmesh à chaque redémarrage de l'ordinateur - attention, si la seule connectivité de votre machine est Janmesh et qu'elle ne peut être controlée qu'à distance uniquement, cette étape est absolument indispensable, car nous avons configuré le pare-feu pour qu'il rejette tout le trafic hormis celui de cjdns<br/>
+The last step is to launch Janmesh at startup - careful, if the only connexion of your machine is Janmesh and your machine can only be remotly control, this step is essential, because we blocked all the trafic except the cjdns one.<br/>
 <code>
 $ sudo update-rc.d janmesh defaults
 </code>
